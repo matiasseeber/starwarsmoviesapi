@@ -32,3 +32,12 @@ CREATE TRIGGER set_updated_trigger
     EXECUTE FUNCTION set_updated();
 
 alter table users add column is_admin boolean default false
+
+CREATE TABLE logins (
+    id serial PRIMARY KEY,
+    user_id int references users(id) not null,
+    refresh_token varchar(30) not null,
+    created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+alter table users add column is_admin boolean default false

@@ -1,8 +1,7 @@
 export type loginPayload = {
-    email: string;
-    password: string;
-} | {
-    refresh_token: string;
+    email?: string;
+    password?: string;
+    refresh_token?: string;
 }
 
 export type verifyEmailPayload = {

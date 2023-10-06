@@ -3,15 +3,64 @@ import { changeUserPasswordBody, loginPayload, resendVerificationEmailPayload, v
 import { UsersService } from '../users/users.service';
 import { sign } from "jsonwebtoken";
 import { EmailService } from 'src/helpers/sendEmail.service';
-import { hash, hashSync } from "bcryptjs";
+import { hash, compareSync } from "bcryptjs";
 import { Request } from 'express';
+import { LoginService } from 'src/login/login.service';
+import { User } from 'src/types/user';
+import { generate } from 'randomstring';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private readonly usersService: UsersService, private readonly emailService: EmailService) { }
+    constructor(private readonly usersService: UsersService, private readonly emailService: EmailService, private readonly loginService: LoginService) { }
 
     @Post('login')
     async login(@Body() data: loginPayload) {
+        const { email, password, refresh_token } = data;
+
+        if ((!email || !password) && !refresh_token) {
+            throw new HttpException("Refresh token or User and Password fields are required.", HttpStatus.BAD_REQUEST);
+        }
+
+        const jwtDuration = `${process.env.JWT_HOURS_DURATION || 1}h`;
+        const jwtOptions = {
+            expiresIn: jwtDuration
+        };
+
+        const generateJWT = (user: User) => sign(user, process.env.SECRET_KEY, jwtOptions);
+
+        if (email) {
+            const user = await this.usersService.getUserByEmail(data.email);
+
+            if (!user || !compareSync(password, user.password)) {
+                throw new HttpException("No user exists with that user-password combination.", HttpStatus.UNAUTHORIZED);
+            }
+
+            delete user.password;
+            delete user.verification_code;
+
+            const token = generateJWT(user);
+
+            const randomstring = generate(22);
+            const newRefreshToken = await this.loginService.insertLogin(user.id, randomstring);
+
+            return { token, refresh_token: newRefreshToken, user };
+        }
+
+        const user = await this.usersService.getUserByRefreshToken(refresh_token);
+
+        if (!user) {
+            throw new HttpException("The refresh token is invalid or expired.", HttpStatus.UNAUTHORIZED);
+        }
+
+        delete user.password;
+        delete user.verification_code;
+
+        const token = generateJWT(user);
+
+        const randomstring = generate(22);
+        const newRefreshToken = await this.loginService.insertLogin(user.id, randomstring);
+
+        return { token, refresh_token: newRefreshToken, user };
     }
 
     @Post('verify')
@@ -48,7 +97,7 @@ export class AuthController {
     @Post('change_password')
     async changeUserPassword(@Body() data: changeUserPasswordBody, @Req() req: Request) {
         if (!data.password) throw new HttpException("Password is a required property.", HttpStatus.BAD_REQUEST);
-        const hashedPassword = hashSync(data.password, process.env.CUSTOM_SALT);
+        const hashedPassword = await hash(data.password, 10);
         await this.usersService.updateUserByID(req.decoded.id, { password: hashedPassword });
         return { msg: "User password was set correctly." };
     }

@@ -53,4 +53,16 @@ export class UsersService {
             data
         });
     }
+    async getUserByRefreshToken(refresh_token: string) {
+        return connection.users.findFirst({
+            where: {
+                logins: {
+                    some: {
+                        refresh_token,
+                        created_at: { gte: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000) }
+                    }
+                }
+            }
+        });
+    }
 }

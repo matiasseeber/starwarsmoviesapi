@@ -17,6 +17,16 @@ model users {
   verification_code_sent_at DateTime? @db.Timestamp(6)
   created_at                DateTime? @default(now()) @db.Timestamp(6)
   updated_at                DateTime? @db.Timestamp(6)
+  is_admin                  Boolean?  @default(false)
+  logins                    logins[]
 
   @@unique([username, email], map: "unique_username_email")
+}
+
+model logins {
+  id            Int       @id @default(autoincrement())
+  user_id       Int
+  refresh_token String    @db.VarChar(30)
+  created_at    DateTime? @default(now()) @db.Timestamp(6)
+  users         users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
