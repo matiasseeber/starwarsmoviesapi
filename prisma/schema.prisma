@@ -30,3 +30,60 @@ model logins {
   created_at    DateTime? @default(now()) @db.Timestamp(6)
   users         users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
+
+model characters {
+  id         Int       @id @default(autoincrement())
+  url        String?
+  active     Boolean?  @default(true)
+  film_id    Int?
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @db.Timestamp(6)
+  films      films?    @relation(fields: [film_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model films {
+  id            Int          @id @default(autoincrement())
+  title         String?      @db.VarChar(256)
+  episode_id    Int?
+  opening_crawl String?
+  director      String?      @db.VarChar(256)
+  producer      String?      @db.VarChar(256)
+  active        Boolean?     @default(true)
+  created_at    DateTime?    @default(now()) @db.Timestamp(6)
+  updated_at    DateTime?    @db.Timestamp(6)
+  release_date  DateTime?    @db.Timestamp(6)
+  characters    characters[]
+  planets       planets[]
+  starships     starships[]
+  vehicles      vehicles[]
+}
+
+model planets {
+  id         Int       @id @default(autoincrement())
+  url        String?
+  active     Boolean?  @default(true)
+  film_id    Int?
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @db.Timestamp(6)
+  films      films?    @relation(fields: [film_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model starships {
+  id         Int       @id @default(autoincrement())
+  url        String?
+  active     Boolean?  @default(true)
+  film_id    Int?
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @db.Timestamp(6)
+  films      films?    @relation(fields: [film_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model vehicles {
+  id         Int       @id @default(autoincrement())
+  url        String?
+  active     Boolean?
+  film_id    Int?
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @db.Timestamp(6)
+  films      films?    @relation(fields: [film_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}

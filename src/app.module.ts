@@ -16,6 +16,6 @@ import { LoginService } from './login/login.service';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(VerifyTokenMiddleware).forRoutes('/auth/change_password'); // Apply the middleware to all routes
+    consumer.apply(VerifyTokenMiddleware).forRoutes('/auth/change_password', "/movies"); // Apply the middleware to all routes
   }
 }
