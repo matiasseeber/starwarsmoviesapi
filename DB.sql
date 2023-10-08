@@ -30,8 +30,6 @@ CREATE TRIGGER set_updated_trigger
     FOR EACH ROW
     EXECUTE FUNCTION set_updated();
 
-alter table users add column is_admin boolean default false
-
 CREATE TABLE logins (
     id serial PRIMARY KEY,
     user_id int references users(id) not null,
@@ -39,7 +37,7 @@ CREATE TABLE logins (
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-alter table users add column is_admin boolean default false
+alter table users add column is_admin boolean default false;
 
 CREATE TABLE films (
 	id serial PRIMARY KEY,
@@ -122,9 +120,12 @@ CREATE TRIGGER set_updated_vehicles_trigger
     FOR EACH ROW
     EXECUTE FUNCTION set_updated();
 
-alter table films drop column edited 
-alter table films add column updated_at TIMESTAMP WITHOUT TIME ZONE
+alter table films drop column edited;
+alter table films add column updated_at TIMESTAMP WITHOUT TIME ZONE;
 
-alter table films drop column release_date
+alter table films drop column release_date;
 ALTER TABLE films
 ADD COLUMN release_date TIMESTAMP WITHOUT TIME ZONE;
+
+ALTER TABLE IF EXISTS public.films
+    RENAME TO movies;

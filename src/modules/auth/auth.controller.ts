@@ -5,7 +5,7 @@ import { sign } from "jsonwebtoken";
 import { EmailService } from 'src/helpers/sendEmail.service';
 import { hash, compareSync } from "bcryptjs";
 import { Request } from 'express';
-import { LoginService } from 'src/login/login.service';
+import { LoginService } from 'src/modules/login/login.service';
 import { User } from 'src/types/tables';
 import { generate } from 'randomstring';
 

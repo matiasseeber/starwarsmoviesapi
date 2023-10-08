@@ -34,7 +34,7 @@ export type Character = {
     films?: [];
 };
 
-export type Film = {
+export type Movie = {
     id?: number;
     title?: string | null;
     episode_id?: number | null;
@@ -58,7 +58,7 @@ export type Planet = {
     film_id?: number | null;
     created_at?: Date | null;
     updated_at?: Date | null;
-    film?: Film | null;
+    film?: Movie | null;
 };
 
 export type Starship = {
@@ -68,7 +68,7 @@ export type Starship = {
     film_id?: number | null;
     created_at?: Date | null;
     updated_at?: Date | null;
-    film?: Film | null;
+    film?: Movie | null;
 };
 
 export type Vehicle = {
@@ -78,5 +78,5 @@ export type Vehicle = {
     film_id?: number | null;
     created_at?: Date | null;
     updated_at?: Date | null;
-    film?: Film | null;
+    film?: Movie | null;
 };

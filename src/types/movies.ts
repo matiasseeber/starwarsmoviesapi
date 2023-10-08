@@ -1,5 +1,10 @@
-type nestedObjectCreateInput = {
-    url?: string
+export type nestedObjectCreateInput = {
+    id?: number,
+    url?: string,
+    active?: boolean,
+    film_i?: number,
+    created_at?: Date | string,
+    updated_at?: Date | string,
 }
 
 export type moviesCreateInput = {
