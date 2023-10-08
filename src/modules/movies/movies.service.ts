@@ -8,6 +8,14 @@ import { Movie } from 'src/types/tables';
 export class MoviesService {
     private objectInfoService = new ObjectInfoService();
     async createMovie(movie: moviesCreateInput) {
+        function normalizeUrl(url: string) {
+            return url.endsWith("/") ? url : url + "/";
+        }
+        const mapCallback = (item) => {
+            return {
+                url: normalizeUrl(item.url)
+            }
+        }
         const { title, episode_id, opening_crawl, director, producer,
             release_date, characters, planets, starships, vehicles } = movie;
         return connection.movies.create({
@@ -15,22 +23,22 @@ export class MoviesService {
                 title, episode_id, opening_crawl, director, producer, release_date: new Date(release_date),
                 characters: {
                     createMany: {
-                        data: characters.map(({ url }) => ({ url }))
+                        data: characters.map(mapCallback)
                     }
                 },
                 planets: {
                     createMany: {
-                        data: planets.map(({ url }) => ({ url }))
+                        data: planets.map(mapCallback)
                     }
                 },
                 starships: {
                     createMany: {
-                        data: starships.map(({ url }) => ({ url }))
+                        data: starships.map(mapCallback)
                     }
                 },
                 vehicles: {
                     createMany: {
-                        data: vehicles.map(({ url }) => ({ url }))
+                        data: vehicles.map(mapCallback)
                     }
                 }
             }
