@@ -9,7 +9,7 @@ export class EmailService {
     async sendEmail(email: string, subject: string, templateName: String, replacements: any) {
         try {
             const __dirname = path.resolve();
-            const filePath = path.join(__dirname, "/templates/" + templateName);
+            const filePath = path.join(__dirname + "/src/templates/" + templateName);
             const source = fs.readFileSync(filePath, 'utf-8').toString();
             const template = handlebars.compile(source);
 
