@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { connection } from 'src/configs/connection';
-import { ObjectInfoService } from 'src/helpers/objectInfo.service';
-import { moviesCreateInput } from 'src/types/movies';
-import { Movie } from 'src/types/tables';
+import { connection } from 'configs/connection';
+import { ObjectInfoService } from 'helpers/objectInfo.service';
+import { moviesCreateInput } from 'types/movies';
+import { Movie } from 'types/tables';
 
 @Injectable()
 export class MoviesService {
@@ -17,7 +17,7 @@ export class MoviesService {
             }
         }
         const { title, episode_id, opening_crawl, director, producer,
-            release_date, characters, planets, starships, vehicles } = movie;
+            release_date, characters = [], planets = [], starships = [], vehicles = [] } = movie;
         return connection.movies.create({
             data: {
                 title, episode_id, opening_crawl, director, producer, release_date: new Date(release_date),
@@ -111,7 +111,7 @@ export class MoviesService {
                 updated_at: true
             }
         };
-        const movie = await connection.movies.findUnique({
+        const movie: Movie = await connection.movies.findUnique({
             where: {
                 active: true,
                 id
@@ -147,10 +147,10 @@ export class MoviesService {
         })
     }
     async updateMovie(id: number, data: Movie) {
-        const mapCallback = (record) => {
+        const mapCallback = (record, table: string) => {
             const { id: record_id, active, url } = record;
             if (record_id) {
-                return connection.characters.update({
+                return connection[table].update({
                     where: {
                         id: record_id
                     },
@@ -159,7 +159,7 @@ export class MoviesService {
                     }
                 })
             };
-            return connection.characters.create({
+            return connection[table].create({
                 data: {
                     url,
                     film_id: id
@@ -170,10 +170,6 @@ export class MoviesService {
             director, episode_id, opening_crawl, producer, release_date,
             planets = [], characters = [], starships = [], vehicles = []
         } = data;
-
-        const objectInfoService = new ObjectInfoService();
-
-        await Promise.all([...characters, ...starships, ...vehicles, ...planets].filter(({ id }) => !id).map(({ url }) => objectInfoService.getObjectInfo(url)));
 
         return connection.$transaction([
             connection.movies.update({
@@ -188,10 +184,10 @@ export class MoviesService {
                     release_date,
                 }
             }),
-            ...characters.map(mapCallback),
-            ...planets.map(mapCallback),
-            ...starships.map(mapCallback),
-            ...vehicles.map(mapCallback)
+            ...characters.map((record) => mapCallback(record, "characters")),
+            ...planets.map((record) => mapCallback(record, "planets")),
+            ...starships.map((record) => mapCallback(record, "starships")),
+            ...vehicles.map((record) => mapCallback(record, "vehicles"))
         ])
     }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { connection } from 'src/configs/connection';
+import { connection } from 'configs/connection';
 
 @Injectable()
 export class LoginService {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ObjectInfoService } from 'src/helpers/objectInfo.service';
-import { Character } from 'src/types/tables';
+import { ObjectInfoService } from 'helpers/objectInfo.service';
+import { Character } from 'types/tables';
 
 @Injectable()
 export class CharactersService {

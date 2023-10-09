@@ -1,0 +1,565 @@
+{
+	"info": {
+		"_postman_id": "feb1d4e4-3767-4851-87c2-ad1064493200",
+		"name": "Star wars api integration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17320280"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"matiasseeber@gmail.com\",\r\n    \"username\": \"matiasseeber\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Verify email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"verification_code\": \"365642\",\r\n    \"email\": \"matiasseeber@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/verify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change user password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMzE2WiIsImlhdCI6MTY5NjYzMTk1MiwiZXhwIjoxNjk2NzE4MzUyfQ.xbRcMLvFqsspRE1m9FoUZoqYQ35zj3o3xE1rNycfo6A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/change_password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"change_password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login with password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMzE2WiIsImlhdCI6MTY5NjYzMTk1MiwiZXhwIjoxNjk2NzE4MzUyfQ.xbRcMLvFqsspRE1m9FoUZoqYQ35zj3o3xE1rNycfo6A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"matiasseeber@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login with refresh token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMzE2WiIsImlhdCI6MTY5NjYzMTk1MiwiZXhwIjoxNjk2NzE4MzUyfQ.xbRcMLvFqsspRE1m9FoUZoqYQ35zj3o3xE1rNycfo6A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refresh_token\": \"7K4xYR01EPSLmCeSvm0bxx\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resend verification email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"matiasseeber@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/resend_verification_email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"resend_verification_email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movies",
+			"item": [
+				{
+					"name": "get all characters",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDlUMDE6Mjk6MzcuNTUxWiIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjk2ODE0OTgyLCJleHAiOjE2OTY4MTg1ODJ9._MpYXLpmAHWbyDmmrO8xasqRj3QKRJ07_saUoqjezjM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/resources/characters?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"resources",
+								"characters"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all planets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDlUMDE6Mjk6MzcuNTUxWiIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjk2ODE0OTgyLCJleHAiOjE2OTY4MTg1ODJ9._MpYXLpmAHWbyDmmrO8xasqRj3QKRJ07_saUoqjezjM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/resources/planets?page=1&search=T",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"resources",
+								"planets"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "search",
+									"value": "T"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all starships",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDlUMDE6Mjk6MzcuNTUxWiIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjk2ODE0OTgyLCJleHAiOjE2OTY4MTg1ODJ9._MpYXLpmAHWbyDmmrO8xasqRj3QKRJ07_saUoqjezjM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/resources/starships?page=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"resources",
+								"starships"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all vehicles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDlUMDE6Mjk6MzcuNTUxWiIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjk2ODE0OTgyLCJleHAiOjE2OTY4MTg1ODJ9._MpYXLpmAHWbyDmmrO8xasqRj3QKRJ07_saUoqjezjM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/resources/vehicles?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"resources",
+								"vehicles"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDhUMTk6NDY6MTMuMjY5WiIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjk2ODA2NDU4LCJleHAiOjE2OTY4MTAwNTh9.hIHfilPmxjKYBGMf4y3hs88HNw-dJZU9oOSv_iYOewk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"string\",\r\n    \"episode_id\": 1,\r\n    \"opening_crawl\": \"string\",\r\n    \"director\": \"string\",\r\n    \"producer\": \"string\",\r\n    \"release_date\": \"2000-10-10\",\r\n    \"characters\": [\r\n        {\r\n            \"url\": \"https://swapi.dev/api/people/100000\"\r\n        }\r\n    ],\r\n    \"planets\": [\r\n        {\r\n            \"url\": \"https://swapi.dev/api/planets/1/\"\r\n        }\r\n    ],\r\n    \"starships\": [\r\n        {\r\n            \"url\": \"https://swapi.dev/api/starships/9\"\r\n        }\r\n    ],\r\n    \"vehicles\": [\r\n        {\r\n            \"url\": \"https://swapi.dev/api/vehicles/4\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all movies",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDlUMDE6Mjk6MzcuNTUxWiIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjk2ODE4NTAxLCJleHAiOjE2OTY4MjIxMDF9.s8PabXtS0ah8UJw3ViX1mbcs-LnVdg5X-u14WkRZYe4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDhUMjM6NTA6MTkuMzU0WiIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2OTY4MTQ3NDgsImV4cCI6MTY5NjgxODM0OH0.sbzz-WF7rzNBLwrh_oH-uHuMYN-5t-cq-2rbcE7CpbY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get movie by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDhUMTk6NDY6MTMuMjY5WiIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjk2Nzk0Mzc4LCJleHAiOjE2OTY3OTc5Nzh9.i6F2jlvz0kvhgbpNEseHzFBqSEfA6UzZX4L0kDxI1GI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJtYXRpYXNzZWViZXIiLCJlbWFpbCI6Im1hdGlhc3NlZWJlckBnbWFpbC5jb20iLCJ2ZXJpZmljYXRlZF9hdCI6IjIwMjMtMTAtMDZUMjI6Mzk6MTIuMjk0WiIsInZlcmlmaWNhdGlvbl9jb2RlX3NlbnRfYXQiOiIyMDIzLTEwLTA2VDIyOjM4OjU4LjQ5NFoiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wNlQyMjozODo1OC43MzVaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDlUMDI6Mzk6MDMuNTYzWiIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2OTY4MTkxNDksImV4cCI6MTY5NjgyMjc0OX0.-EsD_dRWLPet_opAfLj0DUCuvaotb0NX1hnkzXlZfe8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"revenge of the sith 2\",\r\n    \"episode_id\": 1,\r\n    \"opening_crawl\": \"123456\",\r\n    \"director\": \"max power\",\r\n    \"producer\": \"homer simpson\",\r\n    \"release_date\": \"2010-10-10T00:00:00.000Z\",\r\n    \"characters\": [\r\n        {\r\n            \"id\": 4,\r\n            \"active\": false\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get all movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

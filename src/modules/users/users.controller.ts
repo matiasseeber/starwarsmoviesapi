@@ -1,8 +1,8 @@
 import { Controller, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { EmailService } from 'src/helpers/sendEmail.service';
-import { usersCreateInput } from 'src/types/user';
-import { User } from 'src/types/tables';
+import { EmailService } from 'helpers/sendEmail.service';
+import { usersCreateInput } from 'types/user';
+import { User } from 'types/tables';
 
 @Controller('users')
 export class UsersController {

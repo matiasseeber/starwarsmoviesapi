@@ -1,9 +1,9 @@
 import { Controller, Get, Query, Post, Body, HttpException, HttpStatus, Put, Delete, Req, Param } from '@nestjs/common';
-import { ObjectInfoService } from 'src/helpers/objectInfo.service';
-import { Character, Movie, Planet, Starship, Vehicle } from 'src/types/tables';
+import { ObjectInfoService } from 'helpers/objectInfo.service';
+import { Character, Movie, Planet, Starship, Vehicle } from 'types/tables';
 import { MoviesService } from './movies.service';
-import { moviesCreateInput, nestedObjectCreateInput } from 'src/types/movies';
-import { CharactersService } from 'src/modules/characters/characters.service';
+import { moviesCreateInput, nestedObjectCreateInput } from 'types/movies';
+import { CharactersService } from 'modules/characters/characters.service';
 @Controller('movies')
 export class MoviesController {
     constructor(private readonly objectInfoService: ObjectInfoService, private readonly moviesService: MoviesService, private readonly charactersService: CharactersService) { }
@@ -32,7 +32,7 @@ export class MoviesController {
             let response = await this.moviesService.createMovie(data);
             return response;
         } catch (error) {
-            if (error.response.status == 404) {
+            if (error?.response?.status == 404) {
                 throw new HttpException(`${error.response.config.url} is not valid`, HttpStatus.NOT_FOUND);
             }
             throw new HttpException(error, HttpStatus.BAD_REQUEST);
@@ -61,14 +61,13 @@ export class MoviesController {
             };
             const urls = [...getUrlsFromArray(data.characters), ...getUrlsFromArray(data.starships), ...getUrlsFromArray(data.vehicles), ...getUrlsFromArray(data.planets)];
             const [status, json] = this.objectInfoService.areUrlsValid(urls);
-            if (!status) throw new HttpException(json, HttpStatus.BAD_REQUEST);
+            if (!status) throw new HttpException(json, HttpStatus.NOT_FOUND);
             await Promise.all(urls.map((url) => this.objectInfoService.getObjectInfo(url)));
             const movie = await this.moviesService.getMovieByID(+record_id);
             if (!movie) throw new HttpException("No movie was found with that ID", HttpStatus.NOT_FOUND);
             const response = await this.moviesService.updateMovie(+record_id, data);
             return response;
         } catch (error) {
-            console.log(error)
             if (error?.response?.status == 404) {
                 throw new HttpException(`${error.response.config.url} is not valid`, HttpStatus.NOT_FOUND);
             }

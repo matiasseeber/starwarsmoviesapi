@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { connection } from 'src/configs/connection';
-import { verifyEmailPayload } from 'src/types/auth';
-import { User } from 'src/types/tables';
-import { usersCreateInput, UserUpdateInput } from 'src/types/user';
+import { connection } from 'configs/connection';
+import { verifyEmailPayload } from 'types/auth';
+import { User } from 'types/tables';
+import { usersCreateInput, UserUpdateInput } from 'types/user';
 
 @Injectable()
 export class UsersService {

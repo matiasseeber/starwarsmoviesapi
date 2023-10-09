@@ -134,6 +134,7 @@ export class ObjectInfoService {
         for (let i = 0; i < urls.length; i++) {
             const url = urls[i];
             let isUrlValid = false;
+            console.log("pepe 2")
             availableUrls.forEach((item: string) => {
                 if (url.includes(item)) isUrlValid = true;
             });

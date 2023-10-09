@@ -1,12 +1,12 @@
 import { Controller, Post, Body, HttpException, HttpStatus, Req } from '@nestjs/common';
-import { changeUserPasswordBody, loginPayload, resendVerificationEmailPayload, verifyEmailPayload, verifyEmailResponse } from 'src/types/auth';
+import { changeUserPasswordBody, loginPayload, resendVerificationEmailPayload, verifyEmailPayload, verifyEmailResponse } from 'types/auth';
 import { UsersService } from '../users/users.service';
 import { sign } from "jsonwebtoken";
-import { EmailService } from 'src/helpers/sendEmail.service';
+import { EmailService } from 'helpers/sendEmail.service';
 import { hash, compareSync } from "bcryptjs";
 import { Request } from 'express';
-import { LoginService } from 'src/modules/login/login.service';
-import { User } from 'src/types/tables';
+import { LoginService } from 'modules/login/login.service';
+import { User } from 'types/tables';
 import { generate } from 'randomstring';
 
 @Controller('auth')
